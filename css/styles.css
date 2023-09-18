@@ -4054,7 +4054,7 @@ textarea.form-control-lg {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -11299,7 +11299,7 @@ body {
 }
 
 .page-section {
-  padding: 8rem 0;
+  padding: 7.5rem 0;
 }
 
 .text-white-75 {
