@@ -2,7 +2,6 @@
     { 
         session_start(); 
     }
-    var_dump($_SESSION);
 ?>
 <?php
     $roothtml = 'http://localhost/student';
@@ -31,7 +30,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
         <div class="container px-4 px-lg-5">
-            
+            <!-- 2 different page reference depending on session exists-->
             <?php if(isset($_SESSION['useremail'])) {
             ?>
                 <a class="navbar-brand" href="events.php">Student Event Planner</a>
@@ -39,13 +38,10 @@
             else{ ?>
                 <a class="navbar-brand" href="index.php">Student Event Planner</a>
             <?php } ?>
-
-
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        
-                
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto my-2 my-lg-0">      
+                    <!-- 2 different header depending on session exists-->
                     <?php if(isset($_SESSION['useremail'])) {
                     ?>
                         <li class="nav-item"><a class="nav-link" href="createevent.php">Create Event</a></li> 

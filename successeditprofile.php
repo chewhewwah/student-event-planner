@@ -1,2 +1,2 @@
-<p class="text-white-50 mb-5"> <br><br> Successful Change of Password! <br><br> You have been automatically logged out. <br><br> You can now log in with the new password instead!</p>
-<button class="btn btn-outline-light btn-lg px-5" type="button"><a class="nav-link" href="index.php">Home</a></button>
+<p class="text-white-50 mb-5">Successful Password Change!</p>
+<a class="btn btn-outline-light btn-lg px-5" href="<?php echo $roothtml?>/index.php">Back to Home</a>

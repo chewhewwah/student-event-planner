@@ -1,4 +1,8 @@
 <?php include 'webtemplate1header.php'; ?>
+<?php if (!isset($_SESSION["useremail"])){
+    header("Location: $roothtml/index.php");
+}
+?>
 <!-- Masthead-->
 <header class="masthead">
     <div class="container py-5 h-100">
@@ -6,10 +10,8 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
-
                         <div class="mb-md-5 mt-md-4 pb-5">
-
-                            <h2 class="fw-bold mb-2">Create Event</h2>
+                            <h2 class="fw-bold mb-2 text-uppercase">Edit Event</h2>
 
                             <?php if ($_SERVER['REQUEST_METHOD'] === 'GET') : ?>
                             <?php 
@@ -22,7 +24,6 @@
                                 if ($result->num_rows > 0) {
                                         // output data of each row
                                         while($row = $result->fetch_assoc()) {
-                                            
                                             $desc = $row["description"];
                                             $date = $row["date"];
                                             $time = $row["time"];
@@ -31,28 +32,28 @@
                                  }
                             ?>
 
-                            <p class="text-white-50 mb-5">Please enter the required information below.</p>    
                             <form id="contactForm" action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-
+                            <p class="text-white-50 mb-5">Please enter the required information below.</p>  
                                     <input type="hidden" id="eventId" name="eventId" value="<?php echo $eventId ?>"/>
 
                                     <div class="form-outline form-white mb-3">
-                                        <input type="desc" id="desc" name="desc" class="form-control form-control-lg" value="<?php echo $desc ?>"/>
+                                        <input type="desc" id="desc" name="desc" class="form-control form-control-lg" value="<?php echo $desc ?>" required/>
                                         <label class="form-label" for="desc">Description</label>
                                     </div>
                                     
                                     <div class="form-outline form-white mb-3">
-                                        <input type="date" id="date" name="date" class="form-control form-control-lg" value="<?php echo $date ?>"/>
+                                        <input type="date" id="date" name="date" class="form-control form-control-lg" value="<?php echo $date ?>" required/>
                                         <label class="form-label" for="date">Date</label>
                                     </div>
 
                                     <div class="form-outline form-white mb-3">
-                                        <input type="time" id="time" name="time" class="form-control form-control-lg" value="<?php echo $time ?>"/>
+                                        <input type="time" id="time" name="time" class="form-control form-control-lg" value="<?php echo $time ?>" required/>
                                         <label class="form-label" for="time">Time</label>
                                     </div>
 
                                     <div class="form-outline form-white mb-3">
-                                        <input type="comm" id="comm" name="comm" class="form-control form-control-lg" value="<?php echo $comm ?>"/>
+                                        <!--<input type="comm" id="comm" name="comm" class="form-control form-control-lg" value="<?php //echo $comm ?>" required/>-->
+                                        <textarea rows="4" cols="50" id="comm" name="comm" class="form-control form-control-lg" required><?php echo $comm ?></textarea>
                                         <label class="form-label" for="comm">Comments</label>
                                     </div>
 
@@ -60,9 +61,8 @@
                             </form>
                             <?php else : ?>
                                 <?php
-                                //var_dump($_REQUEST);
                                 if(isset($_POST['desc'])) {
-                                    //process
+                                    //process update new event details
                                     $email = $_SESSION["useremail"];
                                     $desc = htmlspecialchars($_POST['desc']);
                                     $date = htmlspecialchars($_POST['date']);
@@ -74,17 +74,16 @@
                                     if ($conn->query($sql) === TRUE) {
                                         header("Location: $roothtml/events.php");
                                     } else {
-                                            echo "Error: " . $sql . "<br>" . $conn->error;
+                                        echo "Error: " . $sql . "<br>" . $conn->error;
                                     }
                                 }
                                 else{
                                     ?>
-                                    <p>Error.'</p>
+                                    <p class="text-white-50 mb-5">Please provide proper details of event.</p>
                                     <?php
                                 }
                                 ?>
                             <?php endif ?>
-
                         </div>
                     </div>
                 </div>
